@@ -1,0 +1,30 @@
+Reach r1 from r3 via r3.3 and r1.3
+Reach r2 from r3 via r3.2 and r2.3
+*** Creating network
+*** Adding controller
+Unable to contact the remote controller at 127.0.0.1:6653
+Connecting to remote controller at 127.0.0.1:6633
+*** Adding hosts:
+h1 h2 h3
+*** Adding switches:
+r1 r2 r3
+*** Adding links:
+(r1, h1) (r1, r2) (r2, h2) (r2, r3) (r3, h3) (r3, r1)
+*** Configuring hosts
+h1 h2 h3
+*** Starting controller
+c0
+*** Starting 3 switches
+r1 r2 r3 ...
+*** Configuring routing for h1
+*** Starting SimpleHTTPServer on host h1
+*** Configuring routing for h2
+*** Starting SimpleHTTPServer on host h2
+*** Configuring routing for h3
+*** Starting SimpleHTTPServer on host h3
+*** Writing ARP cache file ./arp_cache
+*** Configuring ARP for h1
+*** Configuring ARP for h2
+*** Configuring ARP for h3
+*** Starting CLI:
+mininet>
