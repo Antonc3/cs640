@@ -46,7 +46,7 @@ done
 if [ "$s_flag" == true ]; then
     for ((i=1; i<=s_num; i++)); do
         
-        java -jar VirtualNetwork.jar -v s${i} > output_s${i}.log 2>&1 &
+        java -jar VirtualNetwork.jar -v s${i} > output/s${i}.log 2>&1 &
         echo "-----------------"
     done
 fi
@@ -56,9 +56,9 @@ if [ "$r_flag" == true ]; then
     for ((i=1; i<=r_num; i++)); do
         echo "Running -r command attempt #$i with input: $r_num"
         if [ "$t_flag" == true ]; then
-            java -jar VirtualNetwork.jar -v r${i} -r rtable.r${i} -a arp_cache > output_r${i}.log 2>&1 &
+            java -jar VirtualNetwork.jar -v r${i} -r rtable.r${i} -a arp_cache > output/r${i}.log 2>&1 &
         else
-            java -jar VirtualNetwork.jar -v r${i} -a arp_cache > output_r${i}.log 2>&1 &
+            java -jar VirtualNetwork.jar -v r${i} -a arp_cache > output/r${i}.log 2>&1 &
             eval "$@ abc${r_num} 123" &
         fi
         echo "-----------------"
