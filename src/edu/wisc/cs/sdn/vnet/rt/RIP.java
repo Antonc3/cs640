@@ -85,7 +85,15 @@ class RIP {
     // Create Ethernet frame with broadcast destination
     Ethernet ether = new Ethernet();
     ether.setEtherType(Ethernet.TYPE_IPv4);
-    ether.setSourceMACAddress(inIface.getMacAddress().toBytes());
+    if(inIface.getMacAddress() == null){
+	    if(router.FAIL_ON_NULL_MAC){
+		    throw new NullPointerException("Iface " + inIface.getName()+ " has a null mac address");
+	    }
+	    ether.setSourceMACAddress("FF:FF:FF:FF:FF:FF");
+    }
+    else{
+	    ether.setSourceMACAddress(inIface.getMacAddress().toBytes());
+    }
     ether.setDestinationMACAddress("FF:FF:FF:FF:FF:FF");
     ether.setPayload(payload);
     return ether;

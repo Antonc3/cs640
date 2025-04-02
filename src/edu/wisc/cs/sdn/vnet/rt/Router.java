@@ -18,6 +18,7 @@ import net.floodlightcontroller.packet.Ethernet;
  */
 public class Router extends Device
 {	
+	public static final boolean FAIL_ON_NULL_MAC = false;
 	/** Routing table for the router */
 	private RouteTable routeTable;
 	
@@ -167,12 +168,18 @@ public class Router extends Device
 		Iface outIface = best.getInterface();
 
 		if(outIface.getMacAddress()==null){
+			if(FAIL_ON_NULL_MAC){
+				throw new NullPointerException("outiface " + outIface.getName() + " has a null macaddress");
+			}
 			System.out.println("outiface " + outIface.getName() + " has a null macaddress");
+			
 			return;
 		}
+		else{
+			System.out.println("outiface" + outIface.getMacAddress().toBytes().toString());
+			etherPacket.setSourceMACAddress(outIface.getMacAddress().toBytes());
+		}
 
-		System.out.println("outiface" + outIface.getMacAddress().toBytes().toString());
-		etherPacket.setSourceMACAddress(outIface.getMacAddress().toBytes());
 		int nxtHop = best.getGatewayAddress();
 		if(nxtHop == 0){
 			nxtHop = dest;
