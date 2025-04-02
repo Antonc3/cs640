@@ -18,7 +18,7 @@ import net.floodlightcontroller.packet.Ethernet;
  */
 public class Router extends Device
 {	
-	public static final boolean FAIL_ON_NULL_MAC = false;
+	public static final boolean FAIL_ON_NULL_MAC = true;
 	/** Routing table for the router */
 	private RouteTable routeTable;
 	
